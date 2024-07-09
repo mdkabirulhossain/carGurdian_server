@@ -34,6 +34,7 @@ async function run() {
     await client.connect();
     // Send a ping to confirm a successful connection
     const userCollection = client.db('carGurdian').collection('services');
+    const bookingCollection = client.db('carGurdian').collection('bookings');
 
     //find all data from mongodb
     app.get('/services', async(req, res)=>{
@@ -56,6 +57,8 @@ async function run() {
     app.post('/bookings', async(req, res)=>{
       const booking= req.body;
       console.log(booking);
+      const result = await bookingCollection.insertOne(booking);
+      res.send(result);
     })
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
