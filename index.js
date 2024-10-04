@@ -8,6 +8,14 @@ require('dotenv').config()
 //Middleware
 app.use(cors());
 app.use(express.json())
+//for vercel
+
+app.use(cors({
+  origin: [""],
+  methods:["POST", "GET"],
+  Credential:true
+
+}))
 
 app.get('/', (req, res)=>{
     res.send("carGurdian server is running");
